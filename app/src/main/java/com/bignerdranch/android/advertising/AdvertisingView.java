@@ -28,12 +28,14 @@ public class AdvertisingView extends View {
     private float mCenterY;
     private float mBoundSize = 20;
 
-    private int mProgress = 355;
+    private int mProgress = 5;
 
     private Paint mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mBoundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Path mBoundPath = new Path();
+
+    private AdvertisingAnimator mAnimator;
 
     public AdvertisingView(Context context) {
         super(context);
@@ -76,7 +78,7 @@ public class AdvertisingView extends View {
         canvas.drawText(mString, mCenterX, mCenterY + mTextSize / 2, mTextPaint);
     }
 
-    public void start() {
+    public void startAnimator() {
         new CountDownTimer(5000, 30) {
             private static final String TAG = "CountDownTimer";
 
@@ -92,7 +94,13 @@ public class AdvertisingView extends View {
                 //finish时millisUntilFinished  > 0, 有空隙
                 mProgress = -90;
                 invalidate();
+                if (mAnimator != null)  //没设置接口也能使用这个方法，哪里为空看这方法在那些地方使用了
+                    mAnimator.finish();
             }
         }.start();
+    }
+
+    public void setAnimator(AdvertisingAnimator animator) {
+        mAnimator = animator;
     }
 }
