@@ -52,7 +52,7 @@ public class AdvertisingView extends View {
         a.recycle();
     }
 
-    //这个方法快第一个运行
+    //这个方法快第一个运行，在构造方法前
     {
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mCirclePaint.setColor(Color.YELLOW);
